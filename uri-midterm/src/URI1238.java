@@ -4,9 +4,9 @@ public class URI1238 {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
-        int n;
+        int n = in.nextInt();
         int i = 0;
-        while (i < (in.nextInt())) {
+        while (i < n) {
             char[] firstLetters = in.next().toCharArray();
             char[] secondLetters = in.next().toCharArray();
             String result = " ";
