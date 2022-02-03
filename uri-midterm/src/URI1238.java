@@ -9,12 +9,12 @@ public class URI1238 {
         while (i < n) {
             char[] firstLetters = in.next().toCharArray();
             char[] secondLetters = in.next().toCharArray();
-            String result = " ";
+            String result = "";
             for (int j = 0; j < (firstLetters.length+secondLetters.length); j++) {
-                if (j < firstLetters.length) {
+                if (j < (firstLetters.length)) {
                     result += firstLetters[j];
                 }
-                if (j < secondLetters.length) {
+                if (j < (secondLetters.length)) {
                     result += secondLetters[j];
                 }
             }
