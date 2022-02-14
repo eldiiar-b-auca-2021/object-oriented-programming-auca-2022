@@ -22,9 +22,8 @@ public class URI1024 {
               a[k] = (char) (a[k]-1);
 
            }
-           for (int k = 0; k < a.length; k++) {
-               System.out.print(a[k]);
+            System.out.println(a);
            }
         }
     }
-}
+
