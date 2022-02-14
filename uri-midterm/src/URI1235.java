@@ -3,27 +3,33 @@ import java.util.Scanner;
 public class URI1235 {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-
         int n = in.nextInt();
-        int i = 0;
-        while (i < n) {
-            StringBuilder result = new StringBuilder();
-            StringBuilder result2 = new StringBuilder();
-            StringBuilder result3 = new StringBuilder();
-            char[] a = in.nextLine().toCharArray();
-
-            for (int j = ((a.length-1) / 2), index = 0; j >= 0; j--, index++) {
-               result.append(a[j]);
+        in.nextLine();
+        for (int i = 0; i < n; i++) {
+            String line = in.nextLine();
+            String result = changer(line);
+            String firstStr = "";
+            for (int j = result.length()-1; j >= 0; j-- ) {
+                firstStr+=result.charAt(j);
             }
-
-            for (int k = a.length - 1; k > ((a.length-1) / 2); k--) {
-                result2.append(a[k]);
-
+            String secondRes = anotherChanger(line);
+            String secondStr = "";
+            for (int k = secondRes.length()-1; k >= 0; k--) {
+                secondStr+=secondRes.charAt(k);
             }
-            System.out.print(result);
-            System.out.println(result2);
-            i++;
+            String answer = firstStr+secondStr;
+            System.out.println(answer);
         }
 
     }
+    public static String changer(String line) {
+        String firstHalf = line.substring(0,line.length()/2);
+
+        return firstHalf;
+    }
+    public static String anotherChanger(String line) {
+        String secondHalf = line.substring(line.length()/2);
+        return secondHalf;
+    }
+
 }

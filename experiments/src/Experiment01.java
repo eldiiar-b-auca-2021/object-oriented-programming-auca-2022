@@ -1,5 +1,7 @@
 public class Experiment01 {
     public static void main(String[] args) {
+        String j = "Welcome to ";
+        System.out.println(j.substring(0,10));
         String s = "abcdefg";
         s = s.replace("cde", "");
         System.out.println(s);
