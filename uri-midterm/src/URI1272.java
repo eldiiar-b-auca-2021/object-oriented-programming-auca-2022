@@ -4,19 +4,21 @@ public class URI1272 {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
-        in.nextLine();
-        for (int i = 0; i < n; i++) {
-            String a = in.nextLine();
-            String[] words = a.split(" ");
-            for (int j = 0; j <= words.length-1; j++) {
-                String s = words[j];
-                System.out.print(s.charAt(0));
+        String letter;
+        for (int i = 0; i < n; i++){
+            letter = in.nextLine();
+            int j = 0;
+            while (j < letter.length()){
+                while( j < letter.length()&&letter.charAt (j)== ' ' ){
+                    j++;
+                }
+                if (j < letter.length())
+                    System.out.print(letter.charAt(j));
+                while (j < letter.length()&& letter.charAt(j)!=' '){
+                    j++;
+                }
             }
-            System.out.println();
+            System.out.print("\n");
         }
-
     }
 }
-
-
-
