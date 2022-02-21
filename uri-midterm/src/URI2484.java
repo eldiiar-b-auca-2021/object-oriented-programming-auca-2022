@@ -6,24 +6,22 @@ public class URI2484 {
 
         while (in.hasNextLine()) {
             String a = in.next();
-            int pos  = 1;
+            int pos = 1;
             int len = a.length();
             char[] ch = a.toCharArray();
             for (int i = 0; i < ch.length; i++) {
                 for (int j = 0; j < len; j++) {
-                    if (j ==0) {
+                    if (j == 0) {
                         System.out.printf("%" + pos + "s", ch[j]);
                         j+=1;
                     }
-
-                    System.out.print(" "+ch[j]);
+                    if (len != 1) {
+                        System.out.print(" " + ch[j]);
+                    }
                 }
-                pos+=1;
-                if (i == ch.length-1) {
-                    len-=2;
-                }
-                len--;
                 System.out.println();
+                pos+=1;
+                len--;
             }
         }
     }
