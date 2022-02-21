@@ -16,7 +16,7 @@ public class URI2694 {
                 } else {
                     sum += Integer.parseInt(temp);
                 }
-                temp = "0";
+                temp = " 0";
             }
             System.out.println(sum += Integer.parseInt(temp));
             i++;
