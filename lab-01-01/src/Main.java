@@ -126,7 +126,7 @@ public class Main {
                     turtleCol--;
                     break;
             }
-            if (turtleRow < 0 || SCREEN_HEIGHT <= turtleRow || turtleCol < 0 || SCREEN_WIDTH <= turtleCol) {
+            if (isTurtleOfScreen()) {
                 throw new RuntimeException("Turtle is off the screen: " + turtleRow + ", " + turtleCol);
             }
             if (turtleIsPenDown) {
@@ -135,6 +135,9 @@ public class Main {
         }
     }
 
+    private static boolean isTurtleOfScreen() {
+        return turtleRow < 0 || SCREEN_HEIGHT <= turtleRow || turtleCol < 0 || SCREEN_WIDTH <= turtleCol;
+    }
     private static void turtlePenDown() {
         turtleIsPenDown = true;
         screen[turtleRow][turtleCol] = '*';
