@@ -5,7 +5,7 @@ public class URI1120 {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        String failed, sequence;
+         String failed, sequence;
 
         do {
             failed = scan.next();
