@@ -1,44 +1,26 @@
-import java.util.Scanner;
-import java.util.SplittableRandom;
+import java.math.BigInteger;
+import java.util.*;
 
 public class URI1120 {
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
 
-         String failed, sequence;
+        String letter;
 
-        do {
-            failed = scan.next();
-            sequence = scan.next();
-            if (!failed.equals("0") && !sequence.equals("0")) {
-                System.out.println(deleteTheFailed(failed, sequence));
+        while (!(letter = in.nextLine()).equals("0 0")){
+            StringTokenizer str = new StringTokenizer(letter);
+            StringBuilder st = new StringBuilder();
+            char first = str.nextToken().charAt(0);
+            String toStr = str.nextToken();
+            for (int i = 0; i < toStr.length(); i++){
+                if(first != toStr.charAt(i)) {
+                    st.append(i);
+                }
+                if (st.length() == 0) {
+                    st.append("0");
+                }
             }
-        } while (!failed.equals("0") && !sequence.equals("0"));
-    }
-
-    public static String deleteTheFailed(String fail, String sequence) {
-
-        String str = "";
-        for (int i = 0; i < sequence.length(); i++) {
-            if (sequence.charAt(i) != fail.charAt(0)) {
-                str += sequence.charAt(i);
-            }
+            System.out.println(new BigInteger(st.toString()));
         }
-
-        int count = 0;
-        for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) == '0') {
-                count++;
-            }
-        }
-        if (count == str.length()) {
-            return "0";
-        }
-        int i = 0;
-        while (str.charAt(i) == '0') {
-            i++;
-        }
-        str = str.substring(i);
-        return str;
     }
 }
