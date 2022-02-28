@@ -20,8 +20,8 @@ public class URI1278 {
                 s = s.trim().replaceAll("\\s+", " ");
                 if (s.length() > max) {
                     max = s.length();
-                    str[i] = s;
                 }
+                str[i] = s;
             }
             for (int j = 0; j < str.length; j++) {
                 int space = Math.abs(max-str[j].length());
