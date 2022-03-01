@@ -1,32 +1,38 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
-
+    static final int SCREEN_WIDTH = 20;
+    static final int SCREEN_HEIGHT = 20;
     static final int UP = 0;
     static final int RIGHT = 1;
     static final int DOWN = 2;
     static final int LEFT = 3;
-    static final int SCREEN_HEIGHT = 20;
-    static final int SCREEN_WIDTH = 20;
+
+    //screen
     static char[][] screen = new char[SCREEN_HEIGHT][SCREEN_WIDTH];
 
-    static int numberOfLine = 0;
+    //turtle
+    static int turtleCol;
+    static int turtleRow;
+    static int turtleDir;
+    static boolean turtlePenIsDown;
+
+    //userCommand
     static String userCommandName;
     static int userCommandNumberOfSteps;
-    static int turtleRow;
-    static int turtleCol;
-    static int turtleDir;
-    static boolean turtleIsPenDown;
-    static Scanner inp = new Scanner(System.in);
-    public static void main(String[] args) {
 
+    //standard input
+    static Scanner inp = new Scanner(System.in);
+    static int numberOfLine = 0;
+
+
+    public static void main(String[] args) {
         try {
             run();
         } catch (RuntimeException e) {
-            System.out.println("Problem in line: "+numberOfLine+":");
+            System.out.println("Problem in line: " + numberOfLine + ":");
             System.out.println(e.getMessage());
         }
-
     }
 
     private static void run() {
@@ -35,13 +41,13 @@ public class Main {
         initUserCommand();
 
         readUserCommand();
-        while (!userCommandName.equals("Exit")) {
+        while (!userCommandName.equals("exit")) {
             switch (userCommandName) {
                 case "Print":
                     printScreen();
                     break;
                 case "PenUp":
-                    turtlePenUp();
+                    turtlePenUP();
                     break;
                 case "PenDown":
                     turtlePenDown();
@@ -62,11 +68,11 @@ public class Main {
 
     private static void readUserCommand() {
         String line = inp.nextLine().trim();
-        numberOfLine++;
-        switch(line){
+        ++numberOfLine;
+        switch (line) {
             case "Print":
-            case "PenDown":
             case "PenUp":
+            case "PenDown":
             case "TurnLeft":
             case "TurnRight":
             case "Exit":
@@ -74,72 +80,75 @@ public class Main {
                 userCommandNumberOfSteps = 0;
                 return;
         }
+
         Scanner lineInp = new Scanner(line);
         String name = lineInp.next();
-        if (!name.equals("Moves")){
-            throw new RuntimeException("Incorrect command: '"+line+"'");
+        if (!name.equals("Move")) {
+            throw new RuntimeException("Incorrect command '" + line + "'");
         }
         if (!lineInp.hasNextInt()) {
-            throw new RuntimeException("Incorrect number of steps: " + line + ":");
+            throw new RuntimeException("Incorrect number of steps in command: '" + line + "'");
         }
+
         int numberOfSteps = lineInp.nextInt();
-        if (userCommandNumberOfSteps < 0) {
-            throw new RuntimeException("Negative number of steps: " + line + ":");
+        if (numberOfSteps < 0) {
+            throw new RuntimeException("Negative number of steps in command: '" + line + "'");
         }
         if (lineInp.hasNext()) {
-            throw new RuntimeException("Too many arguments in command: " + line + ":");
+            throw new RuntimeException("Too many arguments in command: '" + line + "'");
         }
         userCommandName = name;
         userCommandNumberOfSteps = numberOfSteps;
     }
 
-    private static void initUserCommand() {
+    static void initUserCommand() {
         userCommandName = "";
         userCommandNumberOfSteps = 0;
     }
 
-    private static void turtlePenUp() {
-        turtleIsPenDown = false;
-    }
-
     private static void turtleTurnLeft() {
-        turtleDir = turtleDir == UP ? LEFT : turtleDir-1;
+        turtleDir = turtleDir == UP ? LEFT : turtleDir - 1;
     }
 
     private static void turtleTurnRight() {
-        turtleDir = turtleDir == LEFT ? UP : turtleDir+1;
+        turtleDir = turtleDir == LEFT ? UP : turtleDir + 1;
     }
 
-    private static void turtleMove(int numSteps) {
-        for (int i = 0; i < numSteps; i++) {
+    private static void turtleMove(int numOfSteps) {
+        for (int i = 0; i < numOfSteps; ++i) {
             switch (turtleDir) {
                 case UP:
-                    turtleRow--;
+                    --turtleRow;
                     break;
                 case RIGHT:
-                    turtleCol++;
+                    ++turtleCol;
                     break;
                 case DOWN:
-                    turtleRow++;
+                    ++turtleRow;
                     break;
                 case LEFT:
-                    turtleCol--;
+                    --turtleCol;
                     break;
             }
-            if (isTurtleOfScreen()) {
-                throw new RuntimeException("Turtle is off the screen: " + turtleRow + ", " + turtleCol);
+            if (isOffTheScreen()) {
+                throw new RuntimeException("Turtle is off the screen " + turtleRow + ", " + turtleCol);
             }
-            if (turtleIsPenDown) {
+            if (turtlePenIsDown) {
                 screen[turtleRow][turtleCol] = '*';
             }
         }
     }
 
-    private static boolean isTurtleOfScreen() {
+    private static boolean isOffTheScreen() {
         return turtleRow < 0 || SCREEN_HEIGHT <= turtleRow || turtleCol < 0 || SCREEN_WIDTH <= turtleCol;
     }
+
+    private static void turtlePenUP() {
+        turtlePenIsDown = false;
+    }
+
     private static void turtlePenDown() {
-        turtleIsPenDown = true;
+        turtlePenIsDown = true;
         screen[turtleRow][turtleCol] = '*';
     }
 
@@ -147,22 +156,24 @@ public class Main {
         turtleRow = 0;
         turtleCol = 0;
         turtleDir = RIGHT;
-    }
-
-
-    private static void initScreen() {
-        for (int i = 0; i < screen.length; i++) {
-            for (int j = 0; j < screen[i].length; j++) {
-                screen[i][j] = '.';
-            }
-        }
+      //  turtlePenIsDown = false;
     }
 
     private static void printScreen() {
-        for (int i = 0; i < screen.length; i++) {
+        for (int row = 0; row < SCREEN_HEIGHT; ++row) {
+            //print current column
+            for (int col = 0; col < SCREEN_WIDTH; ++col) {
+                System.out.print(screen[row][col]);
+            }
+            //go to the next line
             System.out.println();
-            for (int j = 0; j < screen.length; j++) {
-                System.out.print(screen[i][j]);
+        }
+    }
+
+    static void initScreen() {
+        for (int row = 0; row < SCREEN_HEIGHT; ++row) {
+            for (int col = 0; col < SCREEN_WIDTH; ++col) {
+                screen[row][col] = '.';
             }
         }
     }
