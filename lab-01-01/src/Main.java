@@ -118,23 +118,23 @@ public class Main {
         for (int i = 0; i < numOfSteps; ++i) {
             switch (turtleDir) {
                 case UP:
-                    --turtleRow;
+                    --turtleCol;
                     break;
                 case RIGHT:
-                    ++turtleCol;
-                    break;
-                case DOWN:
                     ++turtleRow;
                     break;
+                case DOWN:
+                    ++turtleCol;
+                    break;
                 case LEFT:
-                    --turtleCol;
+                    --turtleRow;
                     break;
             }
             if (isOffTheScreen()) {
                 throw new RuntimeException("Turtle is off the screen " + turtleRow + ", " + turtleCol);
             }
             if (turtlePenIsDown) {
-                screen[turtleRow][turtleCol] = '*';
+                screen[turtleCol][turtleRow] = '*';
             }
         }
     }

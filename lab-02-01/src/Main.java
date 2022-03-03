@@ -1,27 +1,38 @@
 import java.util.Scanner;
 
 public class Main {
-
-    static final int SCREEN_HEIGHT = 20;
     static final int SCREEN_WIDTH = 20;
-    static final int numberOfLine = 0;
+    static final int SCREEN_HEIGHT = 20;
 
-    private static Scanner inp = new Scanner(System.in);
+    Scanner inp = new Scanner(System.in);
+    int numberOfLine = 0;
+    Screen screen;
+    Turtle turtle;
+
     public static void main(String[] args) {
+        try{
+            Main app = new Main();
+            app.runApplication();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
+    Main() {
+        screen = new Screen(SCREEN_HEIGHT, SCREEN_WIDTH);
+        turtle = new Turtle(screen, 0, 0, Turtle.RIGHT, false);
+    }
+
+    private void runApplication() {
         try {
             run();
         } catch (RuntimeException e) {
-            System.out.println("Problem in line: "+numberOfLine+":");
+            System.out.println("Problem in line: " + numberOfLine + ":");
             System.out.println(e.getMessage());
         }
-
-
-
     }
-    public static void run (){
-        Screen screen = new Screen(SCREEN_WIDTH, SCREEN_HEIGHT); //constructor
-        Turtle turtle = new Turtle(screen, 0, 0, Turtle.RIGHT, false);
+
+    public void run() {
         UserCommand userCommand = new UserCommand(inp.nextLine());
         while (!userCommand.getName().equals("Exit")) {
             switch (userCommand.getName()) {
@@ -29,22 +40,22 @@ public class Main {
                     screen.print();
                     break;
                 case "PenUp":
-                    turtle.turtlePenUp();
+                    turtle.penUp();
                     break;
                 case "PenDown":
-                    turtle.turtlePenDown();
+                    turtle.penDown();
                     break;
                 case "TurnLeft":
-                    turtle.turtleTurnLeft();
+                    turtle.turnLeft();
                     break;
                 case "TurnRight":
-                    turtle.turtleTurnRight();
+                    turtle.turnRight();
                     break;
                 case "Move":
-                    turtle.turtleMove(userCommand.getNumberOfSteps());
+                    turtle.move(userCommand.getNumberOfSteps());
                     break;
             }
-           userCommand = new UserCommand(inp.nextLine());
+            userCommand = new UserCommand(inp.nextLine());
         }
     }
 }
