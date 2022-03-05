@@ -19,7 +19,12 @@ public class Main extends PApplet {
     }
 
     public void setup() {
-        numberOfSnowflakes = Integer.parseInt(JOptionPane.showInputDialog(null, "Number of snowflakes:"));
+        try {
+            numberOfSnowflakes = Integer.parseInt(JOptionPane.showInputDialog(null, "Number of snowflakes:"));
+        }catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(null,"Error: "+e.getMessage());
+            System.exit(1);
+        }
         x = new float[numberOfSnowflakes];
         y = new float[numberOfSnowflakes];
         r = new float[numberOfSnowflakes];
