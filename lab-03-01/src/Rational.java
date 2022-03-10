@@ -1,12 +1,18 @@
 public class Rational {
     private int num;
     private int den;
+
+    public Rational(int num) {
+        this.num = num;
+        this.den = 1;
+    }
+
     public Rational(int num, int den) {
 
         if (den == 0) {
-           throw new RuntimeException("Rational denominator is equal to 0");
+            throw new RuntimeException("Rational denominator is equal to 0");
         }
-        if (den < 0){
+        if (den < 0) {
             num = -num;
             den = -den;
         }
@@ -20,13 +26,13 @@ public class Rational {
             b = rem;
             rem = a % b;
         }
-        this.num = num/b;
-        this.den = den/b;
+        this.num = num / b;
+        this.den = den / b;
 
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return num + "/" + den;
     }
 
@@ -55,5 +61,26 @@ public class Rational {
         int tempNum = num * other.den;
         int tempDen = den * other.num;
         return new Rational(tempNum, tempDen);
+    }
+
+    public int compareTo(Rational other) {
+        int tempNum1 = num * other.den;
+        int tempNum2 = den * other.den;
+        return Integer.compare(tempNum1, tempNum2);
+
+    }
+
+    public static Rational parse(String s) {
+        try {
+            int index = s.indexOf('/');
+            if (index == -1) {
+                return new Rational(Integer.parseInt(s));
+            }
+
+            return new Rational(Integer.parseInt(s.substring(0, index)),
+                    Integer.parseInt(s.substring(index + 1)));
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("Incorrect Rational: " + s);
+        }
     }
 }
