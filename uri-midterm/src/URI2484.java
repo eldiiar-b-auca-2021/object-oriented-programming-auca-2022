@@ -23,6 +23,7 @@ public class URI2484 {
                 pos+=1;
                 len--;
             }
+            System.out.println();
         }
     }
 }
