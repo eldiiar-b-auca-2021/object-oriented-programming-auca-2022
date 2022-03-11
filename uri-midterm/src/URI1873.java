@@ -5,7 +5,7 @@ public class URI1873 {
     static final String PAPER = "papel";
     static final String SCISSORS = "tesoura";
     static final String LIZARD = "lagarto";
-    static final String SPOCK = "Spock";
+    static final String SPOCK = "spock";
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
@@ -15,8 +15,7 @@ public class URI1873 {
             String second = in.next();
             if (first.equals(second)) {
                 System.out.println("empate");
-            }
-            if (first.equals(SCISSORS) && second.equals(PAPER) || first.equals(PAPER) && second.equals(ROCK)
+            }else if (first.equals(SCISSORS) && second.equals(PAPER) || first.equals(PAPER) && second.equals(ROCK)
             || first.equals(ROCK) && second.equals(LIZARD) || first.equals(LIZARD) && second.equals(SPOCK)
             || first.equals(SPOCK) && second.equals(SCISSORS) || first.equals(SCISSORS) && second.equals(LIZARD)
             || first.equals(LIZARD) && second.equals(PAPER) || first.equals(PAPER) && second.equals(SPOCK)
