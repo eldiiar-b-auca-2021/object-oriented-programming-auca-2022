@@ -5,41 +5,32 @@ public class URI1287 {
         Scanner in = new Scanner(System.in);
 
         while (in.hasNextLine()) {
-            StringBuilder r = new StringBuilder();
             String las = "";
-            int count = 0;
-            char[] ch = in.nextLine().toCharArray();
-            for (int i = 0; i < ch.length; i++) {
-                if (ch[i] == 'o' || ch[i] == 'O') {
-                    ch[i] = '0';
-                } else if (ch[i] == 'l') {
-                    ch[i] = '1';
-                }
-                if (ch[i] == '0') {
-                    count++;
-                }
-                if (Character.isDigit(ch[i])) {
-                    las += ch[i];
-                }
-            }
-            if (las.isEmpty()) {
-                System.out.println("error");
-            } else if (checkInt(las)) {
-                System.out.println("error");
-            } else if (count == las.length()){
-                System.out.println("0");
-            } else {
-                System.out.println(las);
-            }
-        }
-    }
+            String j = in.nextLine();
 
-    private static boolean checkInt(String las) {
-        boolean k = false;
-        long j = Long.parseLong(las);
-        if (j > Integer.MAX_VALUE) {
-            k = true;
+            j = j.replaceAll(",", "");
+            j = j.replaceAll("O", "0");
+            j = j.replaceAll("l", "1");
+            j = j.replaceAll("o", "0");
+            j = j.replaceAll(" ", "");
+
+            if (j.length() == 0) {
+                System.out.println("error");
+            } else {
+                StringBuilder letter = new StringBuilder(j);
+                while (letter.length() > 0 && letter.charAt(0) == '0') {
+                    letter.deleteCharAt(0);
+                }
+                if (letter.length() == 0) {
+                    letter.append("0");
+                }
+                try {
+                    int d = Integer.parseInt(letter.toString());
+                    System.out.println(letter);
+                } catch (Exception e) {
+                    System.out.println("error");
+                }
+            }
         }
-        return k;
     }
 }
