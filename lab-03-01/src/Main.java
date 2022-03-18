@@ -17,7 +17,8 @@ public class Main {
         System.out.println(multiply);
         System.out.println(divide);
         System.out.printf("%s < %s = %b%n", a, b, a.compareTo(b) < 0);
-        System.out.printf("%s < %s = %b%n", a, b, a.compareTo(b) > 0);
+        System.out.printf("%s > %s = %b%n", a, b, a.compareTo(b) > 0);
 
+        System.out.println(Rational.count);
     }
 }

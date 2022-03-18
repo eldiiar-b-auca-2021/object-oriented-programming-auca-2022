@@ -1,6 +1,7 @@
 public class Rational {
     private int num;
     private int den;
+    static int count;
 
     public Rational(int num) {
         this.num = num;
@@ -8,7 +9,7 @@ public class Rational {
     }
 
     public Rational(int num, int den) {
-
+        count++;
         if (den == 0) {
             throw new RuntimeException("Rational denominator is equal to 0");
         }
@@ -60,12 +61,14 @@ public class Rational {
     public Rational divide(Rational other) {
         int tempNum = num * other.den;
         int tempDen = den * other.num;
+
         return new Rational(tempNum, tempDen);
     }
 
     public int compareTo(Rational other) {
         int tempNum1 = num * other.den;
         int tempNum2 = den * other.den;
+
         return Integer.compare(tempNum1, tempNum2);
 
     }
