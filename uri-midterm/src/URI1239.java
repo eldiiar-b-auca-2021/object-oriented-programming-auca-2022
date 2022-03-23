@@ -5,9 +5,10 @@ public class URI1239 {
         Scanner in = new Scanner(System.in);
         while (in.hasNextLine()) {
             String letter = in.nextLine();
-            letter = letter.replaceAll("_([^_]*)_","<i>$1</i>");
-            letter = letter.replaceAll("\\*([^*]*)\\*","<b>$1</b>");
-
+            while(letter.contains("_") || letter.contains("*")) {
+                letter = letter.replaceFirst("_","<i>").replaceFirst("_","</i>");
+                letter = letter.replaceFirst("\\*", "<b>").replaceFirst("\\*","</b>");
+            }
             System.out.println(letter);
         }
 
