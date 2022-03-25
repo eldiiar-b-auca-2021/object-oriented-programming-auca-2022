@@ -1,9 +1,5 @@
 import java.util.Scanner;
 public class URI2062 {
-    static final String FIRST = "OB";
-    static final String SECOND = "UR";
-    static final String THIRD = "ob";
-    static final String FOURTH = "ur";
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         
