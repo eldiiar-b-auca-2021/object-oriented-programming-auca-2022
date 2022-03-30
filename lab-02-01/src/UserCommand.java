@@ -29,7 +29,7 @@ public class UserCommand {
             throw new RuntimeException("Incorrect number of steps in command: '" + line + "'");
         }
 
-        int numberOfSteps = lineInp.nextInt();
+        numberOfSteps = lineInp.nextInt();
         if (numberOfSteps < 0) {
             throw new RuntimeException("Negative number of steps in command: '" + line + "'");
         }

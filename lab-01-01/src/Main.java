@@ -31,7 +31,7 @@ public class Main {
             run();
         } catch (RuntimeException e) {
             System.out.println("Problem in line: " + numberOfLine + ":");
-            System.out.println(e.getMessage());
+            System.out. println(e.getMessage());
         }
     }
 
