@@ -4,6 +4,7 @@ public class Main {
     static final int SCREEN_WIDTH = 20;
     static final int SCREEN_HEIGHT = 20;
 
+
     Scanner inp = new Scanner(System.in);
     int numberOfLine = 0;
     Screen screen;
