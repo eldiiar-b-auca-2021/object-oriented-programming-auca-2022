@@ -11,6 +11,7 @@ public class Main extends JFrame{
     JButton blueButton = new JButton("BLUE");
 
     Main() {
+        setLayout(new BorderLayout());
       mainPanel = new JPanel();
       mainPanel.setBackground(Color.RED);
       add(mainPanel, BorderLayout.CENTER);

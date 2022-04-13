@@ -1,9 +1,9 @@
-package p02;
+package p04;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Main extends JFrame{
+public class Main extends JFrame {
     JPanel mainPanel;
     JPanel controlPanel;
     JButton redButton = new JButton("RED");
@@ -11,6 +11,7 @@ public class Main extends JFrame{
     JButton blueButton = new JButton("BLUE");
 
     Main() {
+        setLayout(new BorderLayout());
         mainPanel = new JPanel();
         mainPanel.setBackground(Color.RED);
         add(mainPanel, BorderLayout.CENTER);
@@ -19,35 +20,24 @@ public class Main extends JFrame{
         controlPanel.add(redButton);
         controlPanel.add(greenButton);
         controlPanel.add(blueButton);
-        add(controlPanel,BorderLayout.SOUTH);
+        add(controlPanel, BorderLayout.SOUTH);
 
-        redButton.addActionListener(new ButtonActionListener(this, Color.RED));
-        greenButton.addActionListener(new ButtonActionListener(this, Color.GREEN));
-        blueButton.addActionListener(new ButtonActionListener(this, Color.BLUE));
+        // lambda expression: anonymous function on the fly (for  SAM case)
+        redButton.addActionListener(e -> mainPanel.setBackground(Color.RED));
+        greenButton.addActionListener(e -> mainPanel.setBackground(Color.GREEN));
+        blueButton.addActionListener(e -> mainPanel.setBackground(Color.BLUE));
 
 
     }
+
     public static void main(String[] args) {
         Main frame = new Main();
         frame.setTitle("First Swing App");
-        frame.setSize(600,600);
+        frame.setSize(600, 600);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
     }
-}
-
-class ButtonActionListener implements ActionListener{
-    Main main;
-    Color color;
-    public ButtonActionListener(Main main, Color color){
-
-        this.main = main;
-        this.color = color;
+    // inner class
     }
-    @Override
-    public void actionPerformed(ActionEvent e){
-        main.mainPanel.setBackground(color);
-    }
-}
