@@ -6,52 +6,44 @@ public class URI1514 {
 
 
         while (true) {
+            boolean nobodySolvedAtAll = true;
+            boolean everyoneSolvedAtLeastOne = true;
+            boolean everyProblemSolved = true;
+            boolean noProblemSolvedByEveryone = true;
             int numContestants = in.nextInt();
             int numProblems = in.nextInt();
             if (numContestants == 0 && numProblems == 0) {
                 break;
             }
-            int[][] counters = new int[numContestants][numProblems];
-            for (int i = 0; i < numContestants; i++){
-                for (int j = 0; j < numProblems; j++) {
-                    counters[i][j] = in.nextInt();
-                }
-            }
-            int sum = 0, n = 0, aN = 0, allProblems = 0;
-            boolean noProblemSolvedByEveryone = false;
-            boolean everyoneSolvedAtLeastOne = false;
-            boolean everyProblemSolvedAtLeastByOne = false;
-            for (int i = 0 ; i < numContestants; i++){
-                for (int j = 0; j < numProblems; j++){
-                    sum += counters[i][j];
-                }
-                if (sum > 0){
-                    n++;
-                }
-                if (sum == 0){
-                    aN++;
-                }
-                if (sum == numProblems){
-                    everyProblemSolvedAtLeastByOne = true;
-                    allProblems++;
-                }
+            int[] counters = new int[numProblems];
+            int sum = 0;
+            for (int i = 0; i < numContestants; i++) {
                 sum = 0;
+                for (int j = 0; j < numProblems; j++) {
+                    int r = in.nextInt();
+                    sum += r;
+                    counters[j] += r;
+                }
+                if (sum == numProblems) {
+                    nobodySolvedAtAll = false;
+                }
+                if (sum == 0) {
+                    everyoneSolvedAtLeastOne = false;
+                }
             }
-            if (n == numProblems){
-                everyoneSolvedAtLeastOne = true;
-            }
-            if (aN == numContestants){
-                noProblemSolvedByEveryone = true;
+            for (int c : counters) {
+                if (c == 0) {
+                    everyProblemSolved = false;
+                }
+                if (c == numContestants){
+                    noProblemSolvedByEveryone = false;
+                }
             }
             int res = 0;
-            if (allProblems != 3){
-                res += 1;
-            } else {
-                res += 0;
-            }
+            res += nobodySolvedAtAll ? 1 : 0;
             res += everyoneSolvedAtLeastOne ? 1 : 0;
+            res += everyProblemSolved ? 1 : 0;
             res += noProblemSolvedByEveryone ? 1 : 0;
-            res += everyProblemSolvedAtLeastByOne ? 1 : 0;
             System.out.println(res);
         }
     }
