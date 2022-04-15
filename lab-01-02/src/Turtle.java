@@ -39,7 +39,7 @@ public class Turtle {
         for (int i = 0; i < numOfSteps; ++i) {
             switch (dir) {
                 case UP:
-                    --row;
+                        --row;
                     break;
                 case RIGHT:
                     ++col;
