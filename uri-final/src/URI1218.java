@@ -1,50 +1,43 @@
-import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class URI1218 {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
-        int cases = 0;
-        while (in.hasNextLine()){
+        int cases = 0, count = 0, M = 0, F = 0;
+        String g;
+        String num;
+        while (in.hasNext()) {
             cases++;
-            int N = in.nextInt();
+            String N = in.next();
             in.nextLine();
-            ArrayList<Integer> countSize = new ArrayList<>();
-            ArrayList<Character> countChar = new ArrayList<>();
-            StringBuilder k = new StringBuilder();
-            String line = in.nextLine();
-            for (int i = 0; i < line.length(); i++){
-                if(Character.isDigit(line.charAt(i))){
-                   k.append(line.charAt(i));
-                   i+=1;
-                   k.append(line.charAt(i));
-                   String m = k.toString();
-                   countSize.add(Integer.parseInt(m));
-                   m = "";
-                   k = k.delete(0,k.length());
-                }else if(Character.isLetter(line.charAt(i))){
-                    countChar.add(line.charAt(i));
-                }
-            }
-            int F = 0, M = 0, sum = 0;
-            for (int i = 0; i < countSize.size(); i++){
-                if (countSize.get(i).equals(N)){
-                    sum++;
-                    if (countChar.get(i).equals('F')){
-                        F++;
-                    }else if (countChar.get(i).equals('M')){
-                        M++;
+            String[] line = in.nextLine().split(" ");
+            for (int i = 1; i < line.length; i += 2) {
+                num = line[i - 1];
+                g = line[i];
+                if (num.equals(N)) {
+                    count++;
+                    switch (g) {
+                        case "F":
+                            F++;
+                            break;
+                        case "M":
+                            M++;
+                            break;
                     }
                 }
             }
-            System.out.println("Caso "+cases+":");
-            System.out.println("Pares Iguais: "+sum);
+            if (cases != 1){
+                System.out.println();
+            }
+            System.out.printf("Caso %d:\n",cases);
+            System.out.println("Pares Inguais: "+count);
             System.out.println("F: "+F);
             System.out.println("M: "+M);
-            System.out.println();
-            //System.out.println();
+
+            count = 0;
+            F = 0;
+            M= 0;
         }
     }
 }
