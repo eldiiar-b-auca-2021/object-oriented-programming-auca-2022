@@ -5,31 +5,29 @@ public class Main {
         Scanner in = new Scanner(System.in);
 
         Game2048 game = new Game2048();
-        for (int r = 0; r < 4; r++) {
-            for (int c = 0; c < 4; c++) {
-                int x = in.nextInt();
-                game.setAt(r, c, x);
+        for (int i = 0; i < 4; i++){
+            for (int j = 0; j < 4; j++) {
+                int value = in.nextInt();
+                game.setAt(i,j,value);
             }
         }
-
-
-
-            int userSmd = in.nextInt();
-            switch (userSmd) {
+        while (true){
+            int command = in.nextInt();
+            switch(command){
                 case 0:
                     game.moveLeft();
                     break;
-                case 2:
+                case 1:
                     game.moveRight();
                     break;
-                case 1:
+                case 2:
                     game.moveUp();
                     break;
                 case 3:
                     game.moveDown();
                     break;
             }
-            game.print();
-
+            game.display();
+        }
     }
 }

@@ -1,6 +1,6 @@
 package prototype02;
 
-public class Rect extends Object {
+public class Rect {
     private int x;
     private int y;
     private int w;

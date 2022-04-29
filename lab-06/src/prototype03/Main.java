@@ -1,17 +1,14 @@
 package prototype03;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-// encapsulation
-// inheritance
-// polymorphism
+import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         ArrayList<Figure> figures = new ArrayList<>();
         figures.add(new Rect(10, 10, 100, 100));
         figures.add(new Rect(400, 400, 100, 100));
-
+        figures.add(new Circle(500, 10, 100));
         figures.add(new Circle(800, 800, 100));
 
         while (true) {
