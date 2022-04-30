@@ -6,7 +6,6 @@ public class Main {
 
         Game2048 game = new Game2048();
 
-        while (true){
             for (int i = 0; i < 4; i++){
                 for (int j = 0; j < 4; j++) {
                     int value = in.nextInt();
@@ -32,6 +31,6 @@ public class Main {
                     game.print();
                     break;
             }
-        }
+
     }
 }
