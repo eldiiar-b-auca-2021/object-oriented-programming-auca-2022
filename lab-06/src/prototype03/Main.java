@@ -18,7 +18,9 @@ public class Main {
                 break;
             }
             for (Figure f : figures) {
-                if (f.contains(xClick, yClick)) {
+                // polymorphism
+                // late binding (runtime binding) of virtual method (function)
+                if (f.contains(xClick, yClick)) { // call a function with address in elements 5 0f Table of v.f
                     System.out.println(f);
                 }
             }

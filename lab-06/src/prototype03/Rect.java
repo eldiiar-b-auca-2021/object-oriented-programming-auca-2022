@@ -5,14 +5,14 @@ public class Rect extends Figure {
     private int h;
 
     public Rect(int x, int y, int w, int h) {
+        super(x, y);
         if (w < 0) {
             throw new IllegalArgumentException("Rect: width < 0: " + w);
         }
         if (h < 0) {
             throw new IllegalArgumentException("Rect: height < 0: " + h);
         }
-        this.x = x;
-        this.y = y;
+
         this.w = w;
         this.h = h;
     }
