@@ -1,28 +1,19 @@
 import java.util.*;
-
 public class URI1171 {
-    public static void main(String[] args) {
-        Scanner inp = new Scanner(System.in);
 
-        int n = inp.nextInt();
+    public static void main(String[] args){
+        Scanner in = new Scanner(System.in);
 
-        ArrayList<Integer> list = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            int number = inp.nextInt();
-            list.add(number);
+        int cases = in.nextInt();
+        int[] set = new int[2000];
+        for (int i = 0; i < cases; i++){
+            int userInput = in.nextInt();
+            set[userInput]++;
         }
-        Collections.sort(list);
-
-        for (int i = 0; i < list.size(); i++) {
-            int count = 1;
-            for (int j = 1+i; j < list.size(); j++){
-                if (Objects.equals(list.get(i),list.get(j))){
-                    list.remove(list.get(j));
-                    j-=1;
-                    count++;
-                }
+        for (int j = 0; j < set.length; j++){
+            if (set[j]>0){
+                System.out.println(j+" aparece "+set[j]+" vez(es)");
             }
-            System.out.println(list.get(i) + " aparece " + count +" vez(es)");
         }
     }
 }
