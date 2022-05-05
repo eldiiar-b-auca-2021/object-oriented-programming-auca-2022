@@ -1,10 +1,22 @@
-class Game2048 {
-    static int[][] data = new int[4][4];
-    private int goal;
+import java.util.Arrays;
+import java.util.List;
 
-    //    public Game2048(int goal){
-//        this.goal = goal;
-//    }
+public class Game2048 {
+    private static final List<Integer> POSSIBLE_GOALS = Arrays.asList(8, 16, 32, 64);
+    private final int[][] data = new int[4][4];
+    private final int goal;
+
+    public Game2048(int goal) {
+        if (!POSSIBLE_GOALS.contains(goal)) {
+            throw new IllegalArgumentException("Incorrect goal");
+        }
+        this.goal = goal;
+    }
+
+    public Game2048() {
+        this.goal = 16;
+    }
+
     public void setAt(int row, int col, int value) {
         data[row][col] = value;
     }
