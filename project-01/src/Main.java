@@ -1,35 +1,32 @@
 import java.util.Scanner;
 
 public class Main {
+
+    static Scanner inp = new Scanner(System.in);
+    static Game2048 game2048 = new Game2048();
+
     public static void main(String[] args) {
-        Scanner inp = new Scanner(System.in);
-        Game2048 game = new Game2048();
         for (int row = 0; row < 4; ++row) {
             for (int col = 0; col < 4; col++) {
                 int v = inp.nextInt();
-                game.setAt(row, col, v);
+                game2048.setAt(row, col, v);
             }
         }
-        int userCmd = inp.nextInt();
-        int i;
-        switch (userCmd) {
+        int move = inp.nextInt();
+        switch (move) {
             case 0:
-                i = 0;
-                game.moveLeft(i);
+                game2048.moveLeft();
                 break;
             case 1:
-                i = 1;
-                game.moveUp(i);
+                game2048.moveUp();
                 break;
             case 2:
-                i = 2;
-                game.moveRight(i);
+                game2048.moveRight();
                 break;
             case 3:
-                i = 3;
-                game.moveDown(i);
+                game2048.moveDown();
                 break;
         }
-        game.print();
+        game2048.print();
     }
 }
