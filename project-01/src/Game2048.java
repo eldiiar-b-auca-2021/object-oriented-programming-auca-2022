@@ -1,11 +1,14 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class Game2048 {
     private int[][] data = new int[4][4];
     private int goal;
     private static final List<Integer> POSSIBLE_GOALS = Arrays.asList(8, 16, 32, 64);
-
+    private static List<Integer> list = Arrays.asList(0,3);
+    private static int count = 0;
     public Game2048(int goal) {
         if (!POSSIBLE_GOALS.contains(goal)) {
             throw new IllegalArgumentException("Incorrect goal");
@@ -122,5 +125,32 @@ public class Game2048 {
 
     public int getGoal() {
         return goal;
+    }
+    public void random(){
+        Random rnd = new Random();
+        boolean b = true;
+        while(b){
+            int c1 = (int) (Math.random()*4+0);
+            int c2 = (int) (Math.random()*4+0);
+            if (data[c1][c2] == 0){
+              if (count % 10 == 0) {
+                  data[c1][c2] = 2;
+              }else {
+                  data[c1][c2] = 4;
+              }
+            }
+            b = false;
+        }
+    }
+    public void init(){
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                data[i][j] = 0;
+            }
+        }
+        int randomIndex1 = (int)(0+Math.random()*4);
+        int randomIndex2 = (int)(0+Math.random()*4);
+        data[randomIndex1][randomIndex2] = 2;
+        count++;
     }
 }
