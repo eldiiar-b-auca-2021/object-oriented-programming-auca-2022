@@ -8,7 +8,6 @@ public class NumberSquare extends JComponent {
     static Font FONT = new Font("Consolas", Font.PLAIN, 100);;
     private int value;
     private int n = 0;
-    Game2048 game = new Game2048();
 
     NumberSquare(int value){
         this.value = value;
@@ -33,7 +32,7 @@ public class NumberSquare extends JComponent {
             color = Color.getHSBColor(len/11.0f, 0.8f,0.5f);
         }
         g.setColor(color);
-        g.fillRoundRect(0,0,getWidth()-50,getHeight()-20,50,50);
+        g.fillRoundRect(0,0,getWidth()-20,getHeight()-10,50,50);
         FontMetrics metrics = getFontMetrics(FONT);
         ((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 

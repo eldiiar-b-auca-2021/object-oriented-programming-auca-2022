@@ -19,14 +19,13 @@ public class GameFrame extends JFrame{
     Game2048 game;
     GameFrame(){
         game = new Game2048();
-        game.init();
         panelMain = new JPanel();
         panelMain.setBackground(Color.GRAY);
-        BoxLayout layout = new BoxLayout(panelMain,BoxLayout.Y_AXIS);
-        panelMain.setLayout(layout);
+        //BoxLayout layout = new BoxLayout(panelMain,BoxLayout.Y_AXIS);
+        panelMain.setLayout(new BorderLayout());
 
         panelGame = new GamePanel(game.ROWS,game.COLUMNS);
-        panelMain.add(panelGame);
+        panelMain.add(panelGame,BorderLayout.CENTER);
 
         panelButtons = new JPanel();
         panelButtons.setBackground(Color.RED);
@@ -39,9 +38,8 @@ public class GameFrame extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 game.moveLeft();
-                game.random();
+                game.print();
                 updateNumSquares();
-
             }
         });
         contstraints.gridx = 0; contstraints.gridy = 1;
@@ -52,9 +50,8 @@ public class GameFrame extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 game.moveRight();
-                game.random();
+                game.print();
                 updateNumSquares();
-                panelGame.repaint();
             }
         });
         contstraints.gridx = 2; contstraints.gridy = 1;
@@ -65,7 +62,7 @@ public class GameFrame extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 game.moveDown();
-                game.random();
+                game.print();
                 updateNumSquares();
             }
         });
@@ -77,19 +74,14 @@ public class GameFrame extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 game.moveUp();
-                game.random();
+                game.print();
                 updateNumSquares();
             }
         });
         contstraints.gridx = 6; contstraints.gridy = 1;
         panelButtons.add(btnUp, contstraints);
 
-        panelMain.add(panelButtons);
-
-        panelGame.repaint();
-
-
-
+        panelMain.add(panelButtons, BorderLayout.SOUTH);
 
         add(panelMain);
         game.init();
@@ -103,10 +95,12 @@ public class GameFrame extends JFrame{
     }
 
     public void updateNumSquares(){
+        game.random();
         for (int i = 0; i < 4; i++){
             for (int j = 0; j < 4; j++){
                 panelGame.setValue(i, j, game.getCoordinates(i,j));
             }
         }
+        panelGame.repaint();
     }
 }

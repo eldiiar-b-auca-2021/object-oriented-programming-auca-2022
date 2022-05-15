@@ -29,9 +29,9 @@ public class Game2048 {
     public void print() {
         for (int r = 0; r < 4; r++) {
             for (int c = 0; c < 4; c++) {
-               data[r][c] = data[r][c];
+                System.out.printf("%5d", data[r][c]);
             }
-
+            System.out.println();
         }
     }
 
