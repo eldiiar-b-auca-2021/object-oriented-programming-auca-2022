@@ -1,30 +1,27 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class GameFrame extends JFrame{
 
     JPanel panelMain;
-    JPanel panelGame;
+   // GamePanel panelGame;
     JButton btnLeft;
     JButton btnRight;
     JButton btnDown;
     JButton btnUp;
     JPanel panelButtons;
     NumberSquare numberSquare;
+    Game2048 game = new Game2048();
     GameFrame(){
 
         panelMain = new JPanel();
-        panelMain.setBackground(Color.GREEN);
+        panelMain.setBackground(Color.GRAY);
         BoxLayout layout = new BoxLayout(panelMain,BoxLayout.Y_AXIS);
         panelMain.setLayout(layout);
 
-        panelGame = new JPanel();
-        panelMain.add(panelGame);
-        panelGame.setPreferredSize(new Dimension(400,400));
-//        panelGame.setLayout(new GridLayout(4,4));
-//        for (int i = 0; i < 16; i++){
-//            panelGame.add(new NumberSquare(i));
-//        }// here can be a mistake
+
 
         panelButtons = new JPanel();
         panelButtons.setBackground(Color.RED);
@@ -46,19 +43,36 @@ public class GameFrame extends JFrame{
         btnUp = new JButton("Slide Up");
         contstraints.gridx = 6; contstraints.gridy = 1;
         panelButtons.add(btnUp, contstraints);
-
+        panelMain.setFocusable(true);
+        panelMain.requestFocus();
+        panelMain.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                    if (e.getKeyCode() == KeyEvent.VK_UP){
+                        game.moveUp();
+                        game.print();;
+                        panelMain.add(new NumberSquare());
+                    }else if (e.getKeyCode() == KeyEvent.VK_DOWN){
+                        game.moveDown();
+                    }else if (e.getKeyCode() == KeyEvent.VK_LEFT){
+                        game.moveLeft();
+                    }else if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+                        game.moveRight();
+                    }
+                    repaint();
+                }
+        });
+        panelMain.add(new NumberSquare());
         panelMain.add(panelButtons);
         add(panelMain);
 
     }
     public static void main(String[] args) {
         GameFrame grid = new GameFrame();
-        grid.setSize(1000,600);
+        //grid.setSize(1000,600);
         grid.setDefaultCloseOperation(GameFrame.EXIT_ON_CLOSE);
         grid.setLocationRelativeTo(null);
-        JPanel panel = new JPanel();
-        panel.add(new NumberSquare(16));
-        grid.add(panel);
+
         grid.setVisible(true);
 
     }

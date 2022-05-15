@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -9,6 +8,7 @@ public class Game2048 {
     private static final List<Integer> POSSIBLE_GOALS = Arrays.asList(8, 16, 32, 64);
     private static List<Integer> list = Arrays.asList(0,3);
     private static int count = 0;
+    NumberSquare numberSquare;
     public Game2048(int goal) {
         if (!POSSIBLE_GOALS.contains(goal)) {
             throw new IllegalArgumentException("Incorrect goal");
@@ -20,9 +20,9 @@ public class Game2048 {
         this.goal = 16;
     }
 
-    public void setAt(int row, int col, int v) {
-        data[row][col] = v;
-    }
+    //public void setAt(int row, int col, int v) {
+    //     data[row][col] = v;
+    //}
 
 
     public void print() {
@@ -127,19 +127,20 @@ public class Game2048 {
         return goal;
     }
     public void random(){
-        Random rnd = new Random();
+
         boolean b = true;
         while(b){
             int c1 = (int) (Math.random()*4+0);
             int c2 = (int) (Math.random()*4+0);
             if (data[c1][c2] == 0){
-              if (count % 10 == 0) {
+              if (count % 2 == 0) {
                   data[c1][c2] = 2;
               }else {
                   data[c1][c2] = 4;
               }
             }
             b = false;
+            count++;
         }
     }
     public void init(){
@@ -152,5 +153,15 @@ public class Game2048 {
         int randomIndex2 = (int)(0+Math.random()*4);
         data[randomIndex1][randomIndex2] = 2;
         count++;
+    }
+    public int getCoordinates(int i, int j){
+        return data[i][j];
+    }
+    public void setValue(){
+        for (int i = 0; i < 4; i++){
+            for (int j = 0; j < 4; j++){
+
+            }
+        }
     }
 }
