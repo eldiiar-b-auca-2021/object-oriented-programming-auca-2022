@@ -8,7 +8,8 @@ public class Game2048 {
     private static final List<Integer> POSSIBLE_GOALS = Arrays.asList(8, 16, 32, 64);
     private static List<Integer> list = Arrays.asList(0,3);
     private static int count = 0;
-    NumberSquare numberSquare;
+    public final int COLUMNS = 4;
+    public final int ROWS = 4;
     public Game2048(int goal) {
         if (!POSSIBLE_GOALS.contains(goal)) {
             throw new IllegalArgumentException("Incorrect goal");
@@ -28,9 +29,9 @@ public class Game2048 {
     public void print() {
         for (int r = 0; r < 4; r++) {
             for (int c = 0; c < 4; c++) {
-                System.out.printf("%5d", data[r][c]);
+               data[r][c] = data[r][c];
             }
-            System.out.println();
+
         }
     }
 
@@ -157,11 +158,5 @@ public class Game2048 {
     public int getCoordinates(int i, int j){
         return data[i][j];
     }
-    public void setValue(){
-        for (int i = 0; i < 4; i++){
-            for (int j = 0; j < 4; j++){
 
-            }
-        }
-    }
 }
