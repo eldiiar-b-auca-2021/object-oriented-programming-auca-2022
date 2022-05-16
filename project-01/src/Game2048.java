@@ -1,15 +1,14 @@
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 public class Game2048 {
-    private int[][] data = new int[4][4];
+    private static final List<Integer> POSSIBLE_GOALS = Arrays.asList(8, 16, 32, 64, 128, 256, 512, 1024, 2028);
+    private int count = 0;
+    private int score = 0;
     private int goal;
-    private static final List<Integer> POSSIBLE_GOALS = Arrays.asList(8, 16, 32, 64);
-    private static List<Integer> list = Arrays.asList(0,3);
-    private static int count = 0;
-    public final int COLUMNS = 4;
-    public final int ROWS = 4;
+    private int maximum = 0;
+    private final int[][] data = new int[4][4];
+
     public Game2048(int goal) {
         if (!POSSIBLE_GOALS.contains(goal)) {
             throw new IllegalArgumentException("Incorrect goal");
@@ -20,11 +19,6 @@ public class Game2048 {
     public Game2048() {
         this.goal = 16;
     }
-
-    //public void setAt(int row, int col, int v) {
-    //     data[row][col] = v;
-    //}
-
 
     public void print() {
         for (int r = 0; r < 4; r++) {
@@ -48,6 +42,7 @@ public class Game2048 {
             for (int j = 0; j < 3; j++) {
                 if (data[j][c] != 0 && data[j][c] == data[j + 1][c]) {
                     data[j][c] *= 2;
+                    score += data[j][c];
                     for (int k = j + 1; k < 3; k++) {
                         data[k][c] = data[k + 1][c];
                     }
@@ -70,6 +65,7 @@ public class Game2048 {
             for (int j = 0; j < 3; j++) {
                 if (data[r][j] != 0 && data[r][j] == data[r][j + 1]) {
                     data[r][j] *= 2;
+                    score += data[r][j];
                     for (int k = j + 1; k < 3; k++) {
                         data[r][k] = data[r][k + 1];
                     }
@@ -92,6 +88,7 @@ public class Game2048 {
             for (int j = 3; j > 0; j--) {
                 if (data[r][j] != 0 && data[r][j] == data[r][j - 1]) {
                     data[r][j] *= 2;
+                    score += data[r][j];
                     for (int k = j - 1; k > 0; k--) {
                         data[r][k] = data[r][k - 1];
                     }
@@ -115,6 +112,7 @@ public class Game2048 {
             for (int j = 3; j > 0; j--) {
                 if (data[j][c] != 0 && data[j][c] == data[j - 1][c]) {
                     data[j][c] *= 2;
+                    score += data[j][c];
                     for (int k = j - 1; k > 0; k--) {
                         data[k][c] = data[k - 1][c];
                     }
@@ -127,36 +125,51 @@ public class Game2048 {
     public int getGoal() {
         return goal;
     }
-    public void random(){
 
+    public void random() {
         boolean b = true;
-        while(b){
-            int c1 = (int) (Math.random()*4+0);
-            int c2 = (int) (Math.random()*4+0);
-            if (data[c1][c2] == 0){
-              if (count % 2 == 0) {
-                  data[c1][c2] = 2;
-              }else {
-                  data[c1][c2] = 4;
-              }
+        while (b) {
+            int c1 = (int) (Math.random() * 4 + 0);
+            int c2 = (int) (Math.random() * 4 + 0);
+            if (data[c1][c2] == 0) {
+                if (count % 10 == 0) {
+                    data[c1][c2] = 4;
+                } else {
+                    data[c1][c2] = 2;
+                }
             }
             b = false;
             count++;
         }
     }
-    public void init(){
+    public int getScore(){
+        return score;
+    }
+    public void init() {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 data[i][j] = 0;
             }
         }
-        int randomIndex1 = (int)(0+Math.random()*4);
-        int randomIndex2 = (int)(0+Math.random()*4);
+        int randomIndex1 = (int) (0 + Math.random() * 4);
+        int randomIndex2 = (int) (0 + Math.random() * 4);
         data[randomIndex1][randomIndex2] = 2;
         count++;
     }
-    public int getCoordinates(int i, int j){
+    public boolean maxGoal(){
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (data[i][j] > maximum){
+                    maximum = data[i][j];
+                }
+            }
+        }
+        if (maximum == goal){
+            return true;
+        }
+        return false;
+    }
+    public int getCoordinates(int i, int j) {
         return data[i][j];
     }
-
 }
