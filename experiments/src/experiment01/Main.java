@@ -8,14 +8,17 @@ import java.awt.event.KeyEvent;
 public class Main extends JFrame {
     JPanel mainPanel;
     Game2048 game;
-    Tile tile;
     Board board;
+    JPanel gameTitle;
     Main(){
-
+        gameTitle = new GameTitle();
         mainPanel = new CanvasPanel();
+        mainPanel.setLayout(new GridBagLayout());
         game = new Game2048();
         board = new Board();
+        mainPanel.add(gameTitle);
         mainPanel.add(board);
+
         add(mainPanel);
         mainPanel.setFocusable(true);
         mainPanel.requestFocus();
@@ -56,6 +59,10 @@ public class Main extends JFrame {
     }
 
     class CanvasPanel extends JPanel{
+
+        CanvasPanel(){
+            setPreferredSize(new Dimension(getWidth(),getHeight()));
+        }
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -70,5 +77,20 @@ public class Main extends JFrame {
             }
         }
 
+    }
+
+    private class GameTitle extends JPanel {
+        Font FONT = new Font("Consolas", Font.PLAIN, 50);
+        GameTitle(){
+            setFont(FONT);
+            setPreferredSize(new Dimension(400,400));
+            setBackground(Color.BLACK);
+        }
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.setColor(Color.YELLOW);
+            g.drawString("Game2048", 0,200);
+        }
     }
 }

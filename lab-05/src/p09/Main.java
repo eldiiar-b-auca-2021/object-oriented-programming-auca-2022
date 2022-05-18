@@ -63,7 +63,7 @@ public class Main extends JFrame {
             }
 
             g.setColor(Color.RED);
-           g.fillOval(game.getRobotCol() * cellWidth, game.getRobotRow()*cellHeight, cellWidth, cellHeight);
+            g.fillOval(game.getRobotCol() * cellWidth, game.getRobotRow()*cellHeight, cellWidth, cellHeight);
         }
     }
 }

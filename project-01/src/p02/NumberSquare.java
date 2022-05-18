@@ -1,3 +1,5 @@
+package p02;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,7 +14,7 @@ public class NumberSquare extends JComponent {
     NumberSquare(int value){
         this.value = value;
         setFont(FONT);
-        setPreferredSize(new Dimension(1000,1000));
+        setPreferredSize(new Dimension(600,600));
     }
 
     public int getValue(){
@@ -32,13 +34,13 @@ public class NumberSquare extends JComponent {
             color = Color.getHSBColor(len/11.0f, 0.8f,0.5f);
         }
         g.setColor(color);
-        g.fillRoundRect(0,0,getWidth()-20,getHeight()-10,50,50);
+        g.fillRoundRect(100,50,getWidth(),getHeight(),0,0);
         FontMetrics metrics = getFontMetrics(FONT);
         ((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         String txt = Integer.toString(value);
         g.setColor(Color.BLUE);
-        g.drawString(txt,(getWidth()-metrics.stringWidth(txt))/2-20, getHeight()/2+metrics.getAscent()/3);
+        g.drawString(txt,(getWidth()-metrics.stringWidth(txt))/2, getHeight()/2);
     }
 
 }

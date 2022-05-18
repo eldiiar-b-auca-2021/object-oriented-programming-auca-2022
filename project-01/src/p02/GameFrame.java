@@ -1,10 +1,9 @@
+package p02;
+
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicOptionPaneUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class GameFrame extends JFrame{
 
@@ -15,6 +14,7 @@ public class GameFrame extends JFrame{
     JButton btnDown;
     JButton btnUp;
     JPanel panelButtons;
+    JPanel panelTitle;
     NumberSquare numberSquare;
     Game2048 game;
     GameFrame(){
@@ -25,6 +25,9 @@ public class GameFrame extends JFrame{
         panelMain.setLayout(new BorderLayout());
 
         panelGame = new GamePanel(game.ROWS,game.COLUMNS);
+        panelGame.setBackground(Color.BLACK);
+        panelGame.setFocusable(true);
+        panelGame.requestFocus();
         panelMain.add(panelGame,BorderLayout.CENTER);
 
         panelButtons = new JPanel();
@@ -63,7 +66,8 @@ public class GameFrame extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 game.moveDown();
                 game.print();
-                updateNumSquares();
+                repaint();
+                //updateNumSquares();
             }
         });
         contstraints.gridx = 4; contstraints.gridy = 1;
@@ -74,10 +78,11 @@ public class GameFrame extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 game.moveUp();
-                game.print();
                 updateNumSquares();
             }
         });
+
+
         contstraints.gridx = 6; contstraints.gridy = 1;
         panelButtons.add(btnUp, contstraints);
 
@@ -86,6 +91,8 @@ public class GameFrame extends JFrame{
         add(panelMain);
         game.init();
     }
+
+
     public static void main(String[] args) {
         GameFrame grid = new GameFrame();
         grid.setDefaultCloseOperation(GameFrame.EXIT_ON_CLOSE);
@@ -98,7 +105,7 @@ public class GameFrame extends JFrame{
         game.random();
         for (int i = 0; i < 4; i++){
             for (int j = 0; j < 4; j++){
-                panelGame.setValue(i, j, game.getCoordinates(i,j));
+                panelGame.setValue(i, j, game.getCoordinates(i, j));
             }
         }
         panelGame.repaint();

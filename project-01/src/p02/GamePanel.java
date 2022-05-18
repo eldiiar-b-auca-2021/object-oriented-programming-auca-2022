@@ -1,3 +1,6 @@
+package p02;
+
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -14,7 +17,7 @@ public class GamePanel extends JPanel {
         init(xSize,ySize);
     }
     public void init (int xSize, int ySize){
-        removeAll();
+
         COLUMNS = ySize;
         ROWS = xSize;
         setLayout(new GridLayout(ROWS,COLUMNS));

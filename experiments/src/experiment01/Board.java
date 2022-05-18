@@ -10,6 +10,7 @@ public class Board extends JPanel {
     Game2048 game = new Game2048();
 
     Board(){
+        removeAll();
         setPreferredSize(new Dimension(520,520));
         setBackground(Color.GRAY);
         setLayout(new GridLayout(4,4));
@@ -22,8 +23,7 @@ public class Board extends JPanel {
         game.random();
         game.random();
         game.random();
-        game.random();
-        game.random();
+        game.moveRight();
         for (int i = 0; i < 4; i++){
             for (int j = 0; j < 4; j++){
                 tile[i][j] = new Tile(game.getCoordinates(i,j));
