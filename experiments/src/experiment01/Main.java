@@ -20,8 +20,8 @@ public class Main extends JFrame {
         mainPanel.add(board);
 
         add(mainPanel);
-        mainPanel.setFocusable(true);
-        mainPanel.requestFocus();
+        board.setFocusable(true);
+        board.requestFocus();
         mainPanel.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -29,7 +29,6 @@ public class Main extends JFrame {
                 if (e.getKeyCode() == KeyEvent.VK_UP){
                     game.moveUp();
                     game.random();
-                    game.print();
                     update();
                 }else if (e.getKeyCode() == KeyEvent.VK_DOWN){
                     game.moveDown();

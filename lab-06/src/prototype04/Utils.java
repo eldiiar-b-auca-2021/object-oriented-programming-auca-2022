@@ -3,6 +3,7 @@ package prototype04;
 import java.util.ArrayList;
 
 public class Utils {
+    
     public static ArrayList<Figure> createFigures() {
         ArrayList<Figure> figures = new ArrayList<>();
         figures.add(new Rect(10, 10, 100, 100));

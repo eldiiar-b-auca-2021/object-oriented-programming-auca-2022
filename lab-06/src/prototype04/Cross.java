@@ -17,6 +17,6 @@ public class Cross extends Figure{
 
     @Override
     public String toString(){
-        return String.format("Circle %s; %s\n",vRectangle, hRectangle);
+        return String.format("Cross: %s, %s\n",vRectangle, hRectangle);
     }
 }

@@ -20,10 +20,6 @@ public class Board extends JPanel {
     public void drawBoard(){
         //removeAll();
         tile = new Tile[4][4];
-        game.random();
-        game.random();
-        game.random();
-        game.moveRight();
         for (int i = 0; i < 4; i++){
             for (int j = 0; j < 4; j++){
                 tile[i][j] = new Tile(game.getCoordinates(i,j));

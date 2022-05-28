@@ -71,7 +71,6 @@ public class Main extends JFrame {
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
-
             for (Figure f : figures) {
                 f.draw(g);
             }

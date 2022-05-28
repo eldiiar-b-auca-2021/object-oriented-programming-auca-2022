@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Game2048 {
-    private static final List<Integer> POSSIBLE_GOALS = Arrays.asList(8, 16, 32, 64, 128, 256, 512, 1024, 2028);
+    public static List<Integer> POSSIBLE_GOALS = Arrays.asList(8, 16, 32, 64, 128, 256, 512, 1024, 2048);
     private int count = 0;
     private int score = 0;
     private int goal;
@@ -129,6 +129,9 @@ public class Game2048 {
     public void random() {
         boolean b = true;
         while (b) {
+            if (check()){
+                b = false;
+            }
             int c1 = (int) (Math.random() * 4 + 0);
             int c2 = (int) (Math.random() * 4 + 0);
             if (data[c1][c2] == 0) {
@@ -142,6 +145,18 @@ public class Game2048 {
             count++;
         }
     }
+
+    public boolean check() {
+        for (int i = 0; i < 4; i++){
+            for (int j = 0; j < 4; j++){
+                if (data[i][j] == 0){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public int getScore(){
         return score;
     }
@@ -168,6 +183,34 @@ public class Game2048 {
             return true;
         }
         return false;
+    }
+    public boolean checkForGoal() {
+        int max = 0;
+        for (int i = 0; i < 4; i++){
+            for (int j = 0; j < 4; j++){
+                if (data[i][j] > max){
+                    max = data[i][j];
+                }
+            }
+        }
+        return max == goal;
+    }
+
+    public void changeGoalForPlus() {
+        int index = POSSIBLE_GOALS.indexOf(goal);
+        if (goal < 2048){
+            index++;
+            goal = POSSIBLE_GOALS.indexOf(index);
+            init();
+        }
+    }
+    public void changeGoalForMinus() {
+        int index = POSSIBLE_GOALS.indexOf(goal);
+        if (goal > 8){
+            index++;
+            goal = POSSIBLE_GOALS.indexOf(index);
+            init();
+        }
     }
     public int getCoordinates(int i, int j) {
         return data[i][j];

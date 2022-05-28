@@ -1,5 +1,6 @@
 import java.math.BigInteger;
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,26 +14,26 @@ public class Main {
                 new Student("Student B", 2.00, 2001)
         };
 
-        MyArrays.sort(students, new MyComparatorByName());
+        Arrays.sort(students, new MyComparatorByName());
 
         Rational[] a3 = {
-                new Rational(3,1),
-                new Rational(1,2),
-                new Rational(4,5),
-                new Rational(2,3)
+                new Rational(3, 1),
+                new Rational(1, 2),
+                new Rational(4, 5),
+                new Rational(2, 3)
         };
 //
-          MyArrays.sort(a3);
+        MyArrays.sort(a3);
 //        System.out.println(Arrays.toString(a3));
     }
 
-    class MyComparatorByName implements MyComparator{
+}
+class  MyComparatorByName implements Comparator<Student>{
 
-        @Override
-        public int compare(Object o1, Object o2){
-            Student s1 = (Student) o1;
-            Student s2 = (Student)o2;
-            return s1.getName().compareTo(s2.getName());
-        }
+    @Override
+    public int compare(Student o1, Student o2) {
+
+        return o1.getName().compareTo(o2.getName());
+
     }
 }
