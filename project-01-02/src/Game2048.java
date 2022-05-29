@@ -2,17 +2,17 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Game2048 {
-    public static List<Integer> POSSIBLE_GOALS = Arrays.asList(8, 16, 32, 64, 128, 256, 512, 1024, 2048);
-    private int count = 0;
+    public int[] POSSIBLE_GOALS = new int[]{8, 16, 32, 64, 128, 256, 512, 1024, 2048};
+    private int count = 0, index = 0;
     private int score = 0;
     private int goal;
-    private int maximum = 0;
+    public int maximum = 0;
     private final int[][] data = new int[4][4];
 
     public Game2048(int goal) {
-        if (!POSSIBLE_GOALS.contains(goal)) {
-            throw new IllegalArgumentException("Incorrect goal");
-        }
+//        if (!POSSIBLE_GOALS.contains(goal)) {
+//            throw new IllegalArgumentException("Incorrect goal");
+//        }
         this.goal = goal;
     }
 
@@ -125,7 +125,6 @@ public class Game2048 {
     public int getGoal() {
         return goal;
     }
-
     public void random() {
         boolean b = true;
         while (b) {
@@ -170,6 +169,7 @@ public class Game2048 {
         int randomIndex2 = (int) (0 + Math.random() * 4);
         data[randomIndex1][randomIndex2] = 2;
         count++;
+        score = 0;
     }
     public boolean maxGoal(){
         for (int i = 0; i < 4; i++) {
@@ -197,22 +197,44 @@ public class Game2048 {
     }
 
     public void changeGoalForPlus() {
-        int index = POSSIBLE_GOALS.indexOf(goal);
-        if (goal < 2048){
+        if (index < 8){
             index++;
-            goal = POSSIBLE_GOALS.indexOf(index);
+            goal = POSSIBLE_GOALS[index];
             init();
         }
     }
     public void changeGoalForMinus() {
-        int index = POSSIBLE_GOALS.indexOf(goal);
-        if (goal > 8){
-            index++;
-            goal = POSSIBLE_GOALS.indexOf(index);
+        if (index > 0){
+            index--;
+            goal = POSSIBLE_GOALS[index];
             init();
         }
     }
     public int getCoordinates(int i, int j) {
         return data[i][j];
+    }
+    public boolean youLost(){
+        for(int i = 0; i < 4; i++){
+            for (int j = 0; j < 3; j++){
+                if (data[i][j] == data[i][j+1]){
+                    return false;
+                }
+            }
+        }
+        for (int i = 0; i < 4; i++){
+            for (int j = 0; j < 3; j++){
+                if (data[j][i] == data[j+1][i]){
+                    return false;
+                }
+            }
+        }
+        for (int i = 0; i < 4; i++){
+            for (int j = 0; j < 4; j++){
+                if (data[j][i] == 0){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
