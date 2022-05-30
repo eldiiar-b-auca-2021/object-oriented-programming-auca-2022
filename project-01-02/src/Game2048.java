@@ -10,9 +10,6 @@ public class Game2048 {
     private final int[][] data = new int[4][4];
 
     public Game2048(int goal) {
-//        if (!POSSIBLE_GOALS.contains(goal)) {
-//            throw new IllegalArgumentException("Incorrect goal");
-//        }
         this.goal = goal;
     }
 
