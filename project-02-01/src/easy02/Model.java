@@ -85,6 +85,7 @@ public class Model {
             currentLevel = 0;
         }
         currentPuzzle = new Puzzle(LEVELS[currentLevel]);
+        currentPuzzle.setCurrentLevel(currentLevel);
     }
 
     public void reset() {

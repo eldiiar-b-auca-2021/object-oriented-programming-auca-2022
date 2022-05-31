@@ -4,6 +4,8 @@ import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -13,13 +15,17 @@ import java.io.IOException;
 public class Main extends JFrame {
     Model game = new Model();
     CanvasPanel gamePanel;
+    JButton resetButton;
     BufferedImage robot;
     BufferedImage wall;
     BufferedImage ground;
     BufferedImage goal;
     BufferedImage boxRed;
     BufferedImage boxBlue;
+    DataPanel panelLeft;
     Main() throws IOException {
+        setLayout(new BorderLayout());
+        panelLeft = new DataPanel();
         robot = ImageIO.read(new File("images/images/Robot.png"));
         ground = ImageIO.read(new File("images/images/Ground.png"));
         wall = ImageIO.read(new File("images/images/Wall.png"));
@@ -53,13 +59,16 @@ public class Main extends JFrame {
                 repaint();
             }
         });
-        add(gamePanel);
+        resetButton = new JButton("Reset");
+        panelLeft.setBackground(Color.GRAY);
+        add(panelLeft, BorderLayout.EAST);
+        add(gamePanel, BorderLayout.CENTER);
     }
 
     public static void main(String[] args) {
         try {
             Main frame = new Main();
-            frame.setSize(600,600);
+            frame.setSize(1200,700);
             frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
@@ -116,6 +125,41 @@ public class Main extends JFrame {
             }
             drawGroundImage(g, game.getRobotRow(), game.getRobotCol());
             drawImage(g, robot, game.getRobotRow(), game.getRobotCol());
+        }
+    }
+
+    private class DataPanel extends JPanel{
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            setPreferredSize(new Dimension(200,700));
+            g.setColor(Color.YELLOW);
+            g.drawString("Levels", 5, 20);
+            g.setColor(Color.CYAN);
+            g.fillRect(5,25, 150,50);
+            g.setColor(Color.BLACK);
+            g.drawString("MiniCosmos", 45,60);
+            g.setColor(Color.YELLOW);
+            g.drawString("Puzzle", 5, 100);
+            g.setColor(Color.CYAN);
+            g.fillRect(5,105, 150,50);
+            g.setColor(Color.BLACK);
+            g.drawString(Integer.toString(game.getCurrentLevel()+1), 80, 135);
+            g.setColor(Color.YELLOW);
+            g.drawString("Moves", 5, 180);
+            g.setColor(Color.CYAN);
+            g.fillRect(5, 185, 150, 50);
+            g.setColor(Color.BLACK);
+            g.drawString(Integer.toString(game.getMoves()), 80,220);
+            resetButton.setSize(new Dimension(150,50));
+            resetButton.setLocation(5,250);
+            panelLeft.add(resetButton);
+            resetButton.addActionListener(e-> {
+                game.reset();
+                repaint();
+                gamePanel.requestFocus();
+                gamePanel.repaint();
+            });
         }
     }
 }

@@ -8,15 +8,14 @@ public class Puzzle {
     private int cellWidth;
     private int cellHeight;
     private char[][] data;
-    private boolean isRobotOnRed;
-    private boolean hasWon;
+
     int moves;
     private int currentLevel;
-    private int goalRow;
-    private int goalCol;
-    String[] level;
-    Puzzle(String[] level){
+    private int[] storageForGoalCoordinatesR = new int[3];
+    private int[] storageForGoalCoordinatesC = new int[3];
 
+    Puzzle(String[] level){
+        int index = 0;
         cellWidth = level[0].length();
         cellHeight = level.length;
         data = new char[cellWidth][level.length];
@@ -28,18 +27,18 @@ public class Puzzle {
                     robotCol = c;
                 }
                 if (data[r][c] == '.'){
-                    goalRow = r;
-                    goalCol = c;
+                    storageForGoalCoordinatesR[index] = r;
+                    storageForGoalCoordinatesC[index] = c;
+                    index++;
                 }
             }
         }
     }
-
     public void moveLeft() {
-        if (data[robotRow][robotCol-1] != '#' && data[robotRow][robotCol-1] != '$'){
+        if (checkForWalAndBox((robotRow), (robotCol-1))){
             robotCol--;
             data[robotRow][robotCol] = '@';
-            if ((robotRow) == goalRow && (robotCol+1) == goalCol) {
+            if (checkCoordinates(robotRow,(robotCol+1))) {
                 data[robotRow][robotCol + 1] = '.';
             }else {
                 data[robotRow][robotCol + 1] = ' ';
@@ -47,7 +46,7 @@ public class Puzzle {
         }else if (data[robotRow][robotCol-1] == '$' && data[robotRow][robotCol-2] != '#'){
             robotCol--;
             data[robotRow][robotCol] = '@';
-            if ((robotRow) == goalRow && (robotCol+1) == goalCol){
+            if (checkCoordinates(robotRow, (robotCol+1))){
                 data[robotRow][robotCol+1] = '.';
             }else {
                 data[robotRow][robotCol+1] = ' ';
@@ -59,10 +58,10 @@ public class Puzzle {
     }
 
     public void moveRight() {
-        if (data[robotRow][robotCol+1] != '#' && data[robotRow][robotCol+1] != '$'){
+        if (checkForWalAndBox((robotRow), (robotCol+1))){
             robotCol++;
             data[robotRow][robotCol] = '@';
-            if ((robotRow) == goalRow && (robotCol-1) == goalCol){
+            if (checkCoordinates(robotRow,(robotCol-1))){
                 data[robotRow][robotCol-1] = '.';
             }else {
                 data[robotRow][robotCol-1] = ' ';
@@ -70,7 +69,7 @@ public class Puzzle {
         }else if (data[robotRow][robotCol+1] == '$' && data[robotRow][robotCol+2] != '#'){
             robotCol++;
             data[robotRow][robotCol] = '@';
-            if ((robotRow) == goalRow && (robotCol-1) == goalCol){
+            if (checkCoordinates(robotRow,(robotCol-1))){
                 data[robotRow][robotCol-1] = '.';
             }else {
                 data[robotRow][robotCol-1] = ' ';
@@ -82,10 +81,10 @@ public class Puzzle {
     }
 
     public void moveUp() {
-        if (data[robotRow - 1][robotCol] != '#' && data[robotRow - 1][robotCol] != '$') {
+        if (checkForWalAndBox((robotRow-1), (robotCol))) {
             robotRow--;
             data[robotRow][robotCol] = '@';
-            if ((robotRow + 1) == goalRow && robotCol == goalCol) {
+            if (checkCoordinates((robotRow + 1),robotCol)) {
                 data[robotRow + 1][robotCol] = '.';
             } else {
                 data[robotRow + 1][robotCol] = ' ';
@@ -93,7 +92,7 @@ public class Puzzle {
         } else if (data[robotRow - 1][robotCol] == '$' && data[robotRow - 2][robotCol] != '#') {
             robotRow--;
             data[robotRow][robotCol] = '@';
-            if ((robotRow + 1) == goalRow && robotCol == goalCol) {
+            if (checkCoordinates((robotRow + 1),robotCol)) {
                 data[robotRow + 1][robotCol] = '.';
             } else {
                 data[robotRow + 1][robotCol] = ' ';
@@ -105,10 +104,10 @@ public class Puzzle {
     }
 
     public void moveDown() {
-        if (data[robotRow + 1][robotCol] != '#' && data[robotRow + 1][robotCol] != '$') {
+        if (checkForWalAndBox((robotRow+1), (robotCol))) {
             robotRow++;
             data[robotRow][robotCol] = '@';
-            if (robotRow - 1 == goalRow && robotCol == goalCol) {
+            if (checkCoordinates((robotRow-1), robotCol)) {
                 data[robotRow - 1][robotCol] = '.';
             } else {
                 data[robotRow - 1][robotCol] = ' ';
@@ -116,7 +115,7 @@ public class Puzzle {
         } else if (data[robotRow + 1][robotCol] == '$' && data[robotRow + 2][robotCol] != '#') {
             robotRow++;
             data[robotRow][robotCol] = '@';
-            if (robotRow - 1 == goalRow && robotCol == goalCol) {
+            if (checkCoordinates((robotRow-1), robotCol)) {
                 data[robotRow - 1][robotCol] = '.';
             } else {
                 data[robotRow - 1][robotCol] = ' ';
@@ -127,6 +126,21 @@ public class Puzzle {
         checkForWin();
     }
 
+    private boolean checkCoordinates(int r, int c) {
+        for (int i = 0; i < 3; i++){
+            if (storageForGoalCoordinatesR[i] == r &&
+                    storageForGoalCoordinatesC[i] == c){
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean checkForWalAndBox(int r, int c){
+        if (data[r][c] != '#' && data[r][c] != '$'){
+            return true;
+        }
+        return false;
+    }
     public int getRobotRow() {
         return robotRow;
     }
@@ -147,31 +161,32 @@ public class Puzzle {
         return data[r][c];
     }
 
-    public int getCurrentLevel() {
-        return currentLevel;
+    public void setCurrentLevel(int currentLevel) {
+        this.currentLevel = currentLevel;
     }
 
     public int getMoves() {
         return moves;
     }
 
-    public int getGoalRow() {
-        return goalRow;
-    }
-
-    public int getGoalCol() {
-        return goalCol;
-    }
-
 
     public boolean checkForWin(){
+        int countNumForLevel = 0;
         for (int i = 0; i < cellHeight; i++){
             for (int j = 0; j< cellWidth; j++){
-                if (data[i][j] == '$' && goalRow == i && j == goalCol) {
-                    return true;
+                if (data[i][j] == '$') {
+                    for (int k = 0; k < 3; k++){
+                        if (storageForGoalCoordinatesR[k] == i && storageForGoalCoordinatesC[k] == j){
+                            countNumForLevel++;
+                        }
+                    }
                 }
             }
         }
+        if (countNumForLevel == currentLevel+1){
+            return true;
+        }
         return false;
     }
+
 }
