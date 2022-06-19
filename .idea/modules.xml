@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/experiments/experiments.iml" filepath="$PROJECT_DIR$/experiments/experiments.iml" />
+      <module fileurl="file://$PROJECT_DIR$/game2048-swing/game2048-swing.iml" filepath="$PROJECT_DIR$/game2048-swing/game2048-swing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hacker-rank/hacker-rank.iml" filepath="$PROJECT_DIR$/hacker-rank/hacker-rank.iml" />
       <module fileurl="file://$PROJECT_DIR$/lab-01-01/lab-01-01.iml" filepath="$PROJECT_DIR$/lab-01-01/lab-01-01.iml" />
       <module fileurl="file://$PROJECT_DIR$/lab-01-02/lab-01-02.iml" filepath="$PROJECT_DIR$/lab-01-02/lab-01-02.iml" />
       <module fileurl="file://$PROJECT_DIR$/lab-02-02/lab-02-02.iml" filepath="$PROJECT_DIR$/lab-02-02/lab-02-02.iml" />
@@ -18,10 +20,12 @@
       <module fileurl="file://$PROJECT_DIR$/lab-07-02/lab-07-02.iml" filepath="$PROJECT_DIR$/lab-07-02/lab-07-02.iml" />
       <module fileurl="file://$PROJECT_DIR$/lab-07-03/lab-07-03.iml" filepath="$PROJECT_DIR$/lab-07-03/lab-07-03.iml" />
       <module fileurl="file://$PROJECT_DIR$/lab-08/lab-08.iml" filepath="$PROJECT_DIR$/lab-08/lab-08.iml" />
+      <module fileurl="file://$PROJECT_DIR$/leet-code/leet-code.iml" filepath="$PROJECT_DIR$/leet-code/leet-code.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/object-oriented-programming-auca-2022.iml" filepath="$PROJECT_DIR$/.idea/object-oriented-programming-auca-2022.iml" />
       <module fileurl="file://$PROJECT_DIR$/project-01/project-01.iml" filepath="$PROJECT_DIR$/project-01/project-01.iml" />
       <module fileurl="file://$PROJECT_DIR$/project-01-02/project-01-02.iml" filepath="$PROJECT_DIR$/project-01-02/project-01-02.iml" />
       <module fileurl="file://$PROJECT_DIR$/project-02-01/project-02-01.iml" filepath="$PROJECT_DIR$/project-02-01/project-02-01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/project-02-02/project-02-02.iml" filepath="$PROJECT_DIR$/project-02-02/project-02-02.iml" />
       <module fileurl="file://$PROJECT_DIR$/uri-final/uri-final.iml" filepath="$PROJECT_DIR$/uri-final/uri-final.iml" />
       <module fileurl="file://$PROJECT_DIR$/uri-midterm/uri-midterm.iml" filepath="$PROJECT_DIR$/uri-midterm/uri-midterm.iml" />
     </modules>
