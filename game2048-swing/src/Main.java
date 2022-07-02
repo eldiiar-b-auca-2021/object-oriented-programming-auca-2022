@@ -14,9 +14,9 @@ public class Main {
                 case "right": board.shiftRight(); break;
                 case "left": board.shiftLeft(); break;
 
-                default : continue;
+                //default : continue;
             }
-            board.present(board);
+            System.out.println(board);;
         }
     }
 }
