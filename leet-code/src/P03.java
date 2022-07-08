@@ -1,34 +1,28 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class P03 {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
-        ArrayList<Character> word1 = new ArrayList<>();
-        ArrayList<Character> word2 = new ArrayList<>();
-        String first = in.next();
-        String second = in.next();
-        for (int i = 0; i < first.length(); i++){
-            word1.add(first.charAt(i));
-        }
-        for (int i = 0; i < second.length(); i++){
-            word2.add(second.charAt(i));
-        }
-        int steps = 0;
-        for (int i = 0; i < word1.size(); i++){
-            for (int j = 0; j < word2.size(); j++){
-                if (word1.get(i).equals(word2.get(j))){
-                    steps++;
-                    word1.remove(i);
-                    word2.remove(j);
-                    if (i != 0 && j != 0)
-                    i--;
-                    j--;
-                }
+        String s = in.next();
+        Map<Character, Integer> map =  new HashMap<>();
+        char[] arr = s.toCharArray();
+        int longestSubstringLength = 0;
+        for (int i = 0; i < arr.length; i++){
+            char ch = arr[i];
+            if (!map.containsKey(ch)){
+                map.put(ch, i);
+            }else {
+                i = map.get(ch);
+                map.clear();
+            }
+            if (map.size() > longestSubstringLength){
+                longestSubstringLength = map.size();
             }
         }
-        int result = (first.length()-steps + second.length()-steps);
-        System.out.println(result);
+        System.out.println(longestSubstringLength);
     }
 }
