@@ -17,11 +17,14 @@ public class Main {
     }
 
     private static void reverse(ArrayList<Integer> list) {
-
-        for (int i = 0, j = list.size()-1; i < j; i++, j--) {
-           int temp = list.get(i);
-           list.set(i,list.get(j));
-           list.set(j,temp);
+        int start = 0;
+        int end = list.size()-1;
+        while(start < end){
+            int temp = list.get(start);
+            list.set(start, list.get(end));
+            list.set(end, temp);
+            start++;
+            end--;
         }
     }
 }
